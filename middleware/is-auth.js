@@ -15,14 +15,14 @@ module.exports = (req, res, next) => {
     try{
         decodedToken =  jwt.verify(token, 'somesupersecretkey');
     } catch (err) {
-        req.isAuth = flase;
+        req.isAuth = false;
         return next();
     }
     if (!decodedToken) {
-        req.isAuth = flase;
+        req.isAuth = false;
         return next();
     }
     req.isAuth = true;
-    req.userId = decodedToken;
+    req.userId = decodedToken.userId;
     next();
     }
